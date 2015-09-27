@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="bananaitAPP">
+  <head>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <script src="./bootstrap/js/jquery-1.11.3.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./angular/angular.min.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
+    
+    <script src="people.js"></script>
+    
+  </head>
+  <body>
+    <div ng-controller="peopleController as people">
+      <form ng-submit="people.addUser()">
+      <div class="col-md-3">{{people.lastpk}}</div>
+        <div class="col-md-3"><input type="text" class='form-control' ng-model="people.name"  size="30" placeholder="Name"></div>
+        <div class="col-md-3"><input type="text" ng-model="people.surname"  class='form-control' size="30" placeholder="Surname"></div>
+        <div class="col-md-3"><input class="btn btn-primary"type="submit" value="add"></div>
+        
+        
+        
+      </form>
+    <ul id="messages"></ul>
+    <div ng-repeat="show in items">
+      
+      
+      <div ng-hide='people.edit===$index'>
+      <button ng-click='people.deleteUser($index)'>Delete</button>
+        <button ng-click='people.edit=$index'>Edit</button>
+        {{show.ID}}
+        {{show.NAME}}
+        {{show.SURNAME}}
+      </div>
+      
+      <div ng-show='people.edit===$index'>
+      <button ng-click='people.deleteUser($index)'>Delete</button>
+        <button ng-click='people.edit=people.editUser($index)'>Save</button>
+        
+        {{show.ID}}
+        <input type="text" ng-model="show.NAME"  size="30" placeholder="Name">
+        <input type="text" ng-model="show.SURNAME"  size="30" placeholder="Surname">
+        
+      </div>
+    </div>
+  
+  </div>
+
+</body>
+</html>
